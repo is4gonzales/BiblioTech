@@ -1,0 +1,255 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    background: url("img/bi.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    color: #DEB887;
+}
+
+.pagina {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    width: 100%;
+    max-width: 800px;
+    background: #8b451377;
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    animation: aparecer 0.5s ease;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #DEB887;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #DEB887;
+}
+
+/*cadastro*/
+input,
+select {
+    width: 100%;
+    padding: 16px;
+    margin-bottom: 18px;
+    border-radius: 16px;
+    border: 2px solid #D2B48C;
+    background: #deb887ab;
+    font-size: 1rem;
+    transition: 0.3s;
+    outline: none;
+}
+
+input:focus,
+select:focus {
+    border-color: #8B4513;
+    background: #D2B48C;
+}
+
+button {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 16px;
+    background: #8B4513;
+    color: #D2B48C;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+button:hover {
+    transform: translateY(-3px);
+}
+
+/*buscar livro*/
+.busca-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.busca-container input {
+    margin-bottom: 0;
+}
+
+
+#resultadoLivros {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.livro-card {
+    background: #CD853F;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px #452213;
+    transition: 0.3s;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.livro-card:hover {
+    transform:
+        translateY(-8px) scale(1.02);
+}
+
+.livro-card img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+}
+
+.livro-card h3 {
+    padding: 15px 15px 8px;
+    font-size: 1.1rem;
+    color: #452213
+}
+
+.livro-card p {
+    color: #452213;
+    margin-bottom: 15px;
+    padding: 0 15px;
+}
+
+.livro-card button {
+    width: 85%;
+}
+
+/*clientes*/
+.cliente-card {
+    background: #CD853F;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 25px;
+    color: #452213
+}
+
+/*livro selecionado*/
+.livro-selecionado-card {
+    background: #CD853F;
+    border-radius: 24px;
+    padding: 25px;
+    text-align: center;
+    margin-bottom: 25px;
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.05);
+    color: #452213;
+}
+
+.livro-selecionado-card img {
+    width: 180px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+/*emprestimo*/
+#listaEmprestimos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.emprestimo-card {
+    background: #CD853F;
+    border-radius: 24px;
+    padding: 20px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.emprestimo-card:hover {
+    transform: translateY(-5px);
+}
+
+.emprestimo-card img {
+    width: 150px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-bottom: 15px;
+}
+
+.emprestimo-card h3 {
+    margin-bottom: 10px;
+    color: #452213;
+}
+
+.emprestimo-card p {
+    margin-bottom: 8px;
+    color: #452213;
+}
+
+.emprestimo-card button {
+    background: #8B4513;
+}
+
+hr {
+    margin: 40px 0;
+    border: none;
+    border-top: 1px solid #e5e7eb;
+}
+
+
+@media (max-width: 768px) {
+    body {
+        padding: 20px;
+    }
+
+    .card {
+        padding: 25px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .busca-container {
+        flex-direction: column;
+    }
+
+    .livro-card img {
+        height: 280px;
+    }
+}
