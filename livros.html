@@ -16,13 +16,14 @@
 
             <h1>Escolha um Livro</h1>
 
+            <p id="usuarioLogado"></p>
+
             <div class="busca-container">
 
                 <input
                     type="text"
                     id="buscaLivro"
                     placeholder="Digite o nome do livro"
-                    
                 >
 
                 <button onclick="buscarLivros()">
@@ -38,6 +39,31 @@
     </div>
 
     <script src="js/livro.js"></script>
+
+    <script>
+        const usuario =
+            JSON.parse(
+                sessionStorage.getItem("usuarioLogado")
+            );
+
+        if (usuario) {
+
+            document.getElementById(
+                "usuarioLogado"
+            ).innerHTML =
+                `Bem-vindo, <strong>${usuario.nome}</strong>`;
+        }
+
+        function sair() {
+
+            sessionStorage.removeItem(
+                "usuarioLogado"
+            );
+
+            window.location.href =
+                "index.html";
+        }
+    </script>
 
 </body>
 </html>

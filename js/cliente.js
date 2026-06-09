@@ -12,7 +12,10 @@ function cadastrarCliente() {
     const email =
         document.getElementById("email").value.trim();
 
-    if (!nome || !cpf || !email) {
+    const senha =
+        document.getElementById("senha").value.trim();
+
+    if (!nome || !cpf || !email || !senha) {
 
         alert("Preencha todos os campos!");
 
@@ -23,7 +26,9 @@ function cadastrarCliente() {
     const cliente = {
         nome,
         cpf,
-        email
+        email,
+        senha,
+        tipo: "cliente"
     };
 
 
@@ -40,6 +45,11 @@ function cadastrarCliente() {
         JSON.stringify(cliente)
     );
 
+    sessionStorage.setItem(
+        "usuarioLogado",
+        JSON.stringify(cliente)
+    );
+
 
     limparFormulario();
 
@@ -53,6 +63,8 @@ function limparFormulario() {
     document.getElementById("cpf").value = "";
 
     document.getElementById("email").value = "";
+
+    document.getElementById("senha").value = "";
 }
 
 function renderizarClientes() {

@@ -253,3 +253,31 @@ hr {
         height: 280px;
     }
 }
+
+.cadastro-link {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.cadastro-link span {
+    display: block;
+    margin-bottom: 10px;
+    color: #D2B48C;
+    font-size: 0.95rem;
+}
+
+.cadastro-link a {
+    display: inline-block;
+    text-decoration: none;
+    background: #8B4513;
+    color: #D2B48C;
+    padding: 12px 25px;
+    border-radius: 12px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.cadastro-link a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}

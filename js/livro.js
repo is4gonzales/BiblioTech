@@ -1,3 +1,11 @@
+const usuarioLogado =
+    JSON.parse(sessionStorage.getItem("usuarioLogado"));
+
+if (!usuarioLogado) {
+
+    window.location.href = "index.html";
+}
+
 let livroSelecionado = null;
 
 async function buscarLivros() {
@@ -15,11 +23,9 @@ async function buscarLivros() {
         return;
     }
 
-
     resultado.innerHTML = `
         <p>Carregando livros...</p>
     `;
-
 
     try {
 
@@ -37,7 +43,6 @@ async function buscarLivros() {
 
             return;
         }
-
 
         mostrarLivros(data.docs);
 
@@ -58,8 +63,7 @@ function mostrarLivros(livros) {
 
     resultado.innerHTML = "";
 
-
-livros.slice(0, 30).forEach((livro) => {
+    livros.slice(0, 30).forEach((livro) => {
 
         const titulo =
             livro.title || "Sem título";
@@ -69,21 +73,20 @@ livros.slice(0, 30).forEach((livro) => {
                 ? livro.author_name[0]
                 : "Autor desconhecido";
 
-
         const capa = livro.cover_i
             ? `https://covers.openlibrary.org/b/id/${livro.cover_i}-M.jpg`
             : "https://placehold.co/180x250?text=Sem+Capa";
 
         resultado.innerHTML += `
             <div class="livro-card">
-<img 
-    src="${capa}" 
-    alt="${titulo}"
 
-    onerror="
-        this.src='https://placehold.co/180x250?text=Sem+Capa'
-    "
->
+                <img 
+                    src="${capa}" 
+                    alt="${titulo}"
+                    onerror="
+                        this.src='https://placehold.co/180x250?text=Sem+Capa'
+                    "
+                >
 
                 <h3>${titulo}</h3>
 

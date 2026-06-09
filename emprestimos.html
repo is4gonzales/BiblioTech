@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
 
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <div class="pagina">
@@ -23,17 +25,28 @@
                 Finalizar Empréstimo
             </button>
 
+            <button onclick="window.location.href='livros.html'">
+                Buscar Outro Livro
+            </button>
+
             <hr>
 
             <h2>Empréstimos Ativos</h2>
 
             <div id="listaEmprestimos"></div>
 
+            <button onclick="sair()">
+                Sair
+            </button>
         </div>
 
+
     </div>
+
+
 
     <script src="js/emprestimos.js"></script>
 
 </body>
+
 </html>

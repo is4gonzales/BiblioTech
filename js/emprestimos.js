@@ -1,8 +1,13 @@
 let emprestimos =
     JSON.parse(localStorage.getItem("emprestimos")) || [];
 
-const cliente =
-    JSON.parse(localStorage.getItem("clienteAtual"));
+const usuarioLogado =
+    JSON.parse(sessionStorage.getItem("usuarioLogado"));
+
+if (!usuarioLogado) {
+
+    window.location.href = "index.html";
+}
 
 const livroSelecionado =
     JSON.parse(localStorage.getItem("livroSelecionado"));
@@ -10,14 +15,14 @@ const livroSelecionado =
 const clienteInfo =
     document.getElementById("clienteInfo");
 
-if (clienteInfo && cliente) {
+if (clienteInfo && usuarioLogado) {
 
     clienteInfo.innerHTML = `
         <div class="cliente-card">
 
-            <h3>${cliente.nome}</h3>
+            <h3>${usuarioLogado.nome}</h3>
 
-            <p>${cliente.email}</p>
+            <p>${usuarioLogado.email}</p>
 
         </div>
     `;
@@ -39,16 +44,14 @@ if (areaLivro && livroSelecionado) {
     `;
 }
 
-
 function finalizarEmprestimo() {
 
-    if (!cliente) {
+    if (!usuarioLogado) {
 
-        alert("Nenhum cliente encontrado!");
+        alert("Nenhum usuário encontrado!");
 
         return;
     }
-
 
     if (!livroSelecionado) {
 
@@ -66,7 +69,7 @@ function finalizarEmprestimo() {
 
     const emprestimo = {
 
-        cliente: cliente.nome,
+        cliente: usuarioLogado.nome,
 
         livro: livroSelecionado.titulo,
 
@@ -75,9 +78,7 @@ function finalizarEmprestimo() {
         devolucao
     };
 
-
     emprestimos.push(emprestimo);
-
 
     localStorage.setItem(
         "emprestimos",
@@ -86,11 +87,11 @@ function finalizarEmprestimo() {
 
     localStorage.removeItem("livroSelecionado");
 
-    document.getElementById("livroSelecionado").innerHTML = "";
-
+    document.getElementById(
+        "livroSelecionado"
+    ).innerHTML = "";
 
     renderizarEmprestimos();
-
 
     alert("Empréstimo realizado com sucesso!");
 }
@@ -100,14 +101,16 @@ function renderizarEmprestimos() {
     const lista =
         document.getElementById("listaEmprestimos");
 
-
     if (!lista) return;
-
 
     lista.innerHTML = "";
 
+    const meusEmprestimos =
+        emprestimos.filter(
+            emp => emp.cliente === usuarioLogado.nome
+        );
 
-    emprestimos.forEach((emp, index) => {
+    meusEmprestimos.forEach((emp) => {
 
         lista.innerHTML += `
             <div class="emprestimo-card">
@@ -117,39 +120,23 @@ function renderizarEmprestimos() {
                 <h3>${emp.livro}</h3>
 
                 <p>
-                    Cliente:
-                    ${emp.cliente}
-                </p>
-
-                <p>
                     Devolução:
                     ${emp.devolucao}
                 </p>
-
-                <button onclick="removerEmprestimo(${index})">
-                    Excluir Empréstimo
-                </button>
 
             </div>
         `;
     });
 }
 
-function removerEmprestimo(index) {
-
-    emprestimos.splice(index, 1);
-
-
-    localStorage.setItem(
-        "emprestimos",
-        JSON.stringify(emprestimos)
-    );
-
-
-    renderizarEmprestimos();
-}
-
 renderizarEmprestimos();
 
-window.finalizarEmprestimo = finalizarEmprestimo;
-window.removerEmprestimo = removerEmprestimo;
+window.finalizarEmprestimo =
+    finalizarEmprestimo;
+
+    function sair() {
+
+    sessionStorage.removeItem("usuarioLogado");
+
+    window.location.href = "index.html";
+}
